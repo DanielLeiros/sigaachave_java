@@ -31,7 +31,7 @@ GET - Retorna reserva {id}
 `ip:port/reservas/{id}`
 
 POST - Adiciona reserva  
-`ip:port/reservas/adicionar/{sala}+{data}`
+`ip:port/reservas/adicionar/{sala}+{data}+{isFixo}`
 
 PUT - Atualiza reserva {id}  
 `ip:port/reservas/{id}/atualizar/{sala}+{data}+{status}`
