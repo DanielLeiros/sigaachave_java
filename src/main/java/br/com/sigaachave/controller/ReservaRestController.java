@@ -65,7 +65,7 @@ public class ReservaRestController {
 		return new ResponseEntity<>(HttpStatus.OK); 
 	}
 	
-	@RequestMapping(value = "/reservas/{id}/atualizar/{sala}+{data}+{status}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/reservas/{id}/atualizar/{sala}+{data}+{status}+{isFixo}", method = RequestMethod.PUT)
 	public ResponseEntity<Reserva> update(@PathVariable("id") Long id, Reserva reserva){
 		
 		if(reservaRepository.existsById(id) == false) {
@@ -92,4 +92,17 @@ public class ReservaRestController {
 		reservaRepository.save(reserva.get());
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/reservas/status/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Reserva> attStatus(@PathVariable("id") Long id){
+		
+		if(reservaRepository.existsById(id) == false) {
+			return new ResponseEntity<Reserva>(HttpStatus.NOT_FOUND);
+		}else {
+			Optional<Reserva> reserva = reservaRepository.findById(id);
+			reserva.get().setStatus(StatusReserva.CONFIRMADA);
+			reservaRepository.save(reserva.get());
+		}
+		return new ResponseEntity<Reserva>(HttpStatus.OK);
+	}	
 }
